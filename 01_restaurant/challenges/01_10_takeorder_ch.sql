@@ -22,7 +22,9 @@ VALUES ((SELECT Customers.CustomerID
         '2022-09-20 14:00:00');
 
 -- View added Order
-SELECT * FROM Orders ORDER BY OrderID DESC;
+SELECT * FROM Orders 
+WHERE CustomerID == 70
+ORDER BY OrderID DESC;
 
 -- View Ordered Dishes in one table
 SELECT DishID, Name, Price
@@ -45,8 +47,9 @@ VALUES (1001, 20);
 SELECT * FROM OrdersDishes WHERE OrderID == 1001;
 
 -- Calculate Price
-SELECT * -- SUM(Dishes.Price)
-FROM Orders WHERE Orders.OrderID == 1001
-JOIN Dishes ON Orders.DishID = Dishes.DishID;
+SELECT SUM(Dishes.Price)
+FROM Dishes 
+JOIN OrdersDishes ON Dishes.DishID = OrdersDishes.DishID
+WHERE OrdersDishes.OrderID == 1001;
 
 
